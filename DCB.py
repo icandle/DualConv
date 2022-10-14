@@ -68,7 +68,7 @@ class DualConv(nn.Module):
 
         return (c+1)/2
     
-    def forward(self, x, branches='F'):     
+    def forward(self, x):     
         if self.training:
             cl = self.dis_loss(self.k1,self.k2)
             out = F.conv2d(input=x, weight=self.k1+self.k2, bias=self.b1+self.b2, stride=1, padding=self.padding, groups=self.groups)
