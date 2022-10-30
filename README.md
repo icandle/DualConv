@@ -1,6 +1,6 @@
 # DualConv
 
-### Codes for paper "Dual Convolution Re-parameterization for Image Super-resolution".
+### Codes for paper "Dual Convolution Re-parameterization for Image Super-Resolution".
 
 |Models    | HR        | w/o DCB  | w/ DCB |
 |:---------|:---------:|:--------:|:------:|
