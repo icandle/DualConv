@@ -61,19 +61,13 @@ class DualConv(nn.Module):
                     torch.sqrt(torch.sum((fake_Y - fake_Y_mean) ** 2)) * torch.sqrt(torch.sum((Y - Y_mean) ** 2)))
         return corr
  
-    def dis_loss(self, x, y):
-        x = x.view(1, -1)
-        y = y.view(1, -1) 
+    def dis_loss(self):
+        x = self.k1.view(1, -1)
+        y = self.k2.view(1, -1) 
         c = self.get_corr(x, y)
-
         return (c+1)/2
     
     def forward(self, x):     
-        if self.training:
-            cl = self.dis_loss(self.k1,self.k2)
-            out = F.conv2d(input=x, weight=self.k1+self.k2, bias=self.b1+self.b2, stride=1, padding=self.padding, groups=self.groups)
-            return self.nonlinear(out) , cl
-        else:
-            out = F.conv2d(input=x, weight=self.k1+self.k2, bias=self.b1+self.b2, stride=1, padding=self.padding, groups=self.groups)
-            return self.nonlinear(out) 
+        return F.conv2d(input=x, weight=self.k1+self.k2, bias=self.b1+self.b2, stride=1, padding=self.padding, groups=self.groups)
+
 
